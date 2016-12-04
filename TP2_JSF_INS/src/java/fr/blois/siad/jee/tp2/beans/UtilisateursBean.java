@@ -10,6 +10,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 
 @ManagedBean
 @RequestScoped
@@ -69,7 +70,7 @@ public class UtilisateursBean {
     public String checkAddUser() {
 
         // Validation
-        FacesContext context = FacesContext.getCurrentInstance();
+        FacesContext context = FacesContext.getCurrentInstance();        
         if (email == null || email.isEmpty()) {
             context.addMessage(null, new FacesMessage("Email obligatoire"));
         }
@@ -78,6 +79,12 @@ public class UtilisateursBean {
         }
         if (nom == null || nom.isEmpty()) {
             context.addMessage(null, new FacesMessage("Nom obligatoire"));
+        }
+        if (motDePasse.length() < 8) {
+            context.addMessage(null, new FacesMessage("MDP trop court !"));
+        }
+        if (!email.matches("(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)*\\@(?:\\w|[\\-_])+(?:\\.(?:\\w|[\\-_])+)+" )) {
+            context.addMessage(null, new FacesMessage("Email non valide"));
         }
         if (!context.getMessageList().isEmpty()) {
             return null;
