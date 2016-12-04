@@ -10,7 +10,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
 
 @ManagedBean
 @RequestScoped
@@ -19,7 +18,7 @@ public class UtilisateursBean {
     private String email;
     private String motDePasse;
     private String nom;
-
+ 
     private static final long serialVersionUID = 1L;
 
     public UtilisateursBean() {
@@ -101,8 +100,8 @@ public class UtilisateursBean {
     }
     
     public String update(Integer id){
-        getService().update(id, motDePasse);
-        return "updateMdp";
+        getService().update(id);
+        return "index";
     }
     
     public String ban(Integer id){

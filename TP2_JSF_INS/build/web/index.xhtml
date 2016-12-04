@@ -8,15 +8,14 @@
     </h:head>
     <h:body>
         <h1>Liste des utilisateurs</h1>
-        <h:dataTable value="#{utilisateursBean.utilisateurs}" var="o" border="0" class="order-table">
-<!-- PLACER UNE CONDITION POUR CHANGER LA COULEUR EN ROUGE "o.banni" = true -->             
+        <h:dataTable value="#{utilisateursBean.utilisateurs}" var="o" border="0" class="order-table">         
                 <h:column>
                     <f:facet name="header">Id</f:facet>
                         #{o.id}
                 </h:column>
                 <h:column>
-                    <f:facet name="header">Nom</f:facet>
-                        #{o.nom}
+                        <f:facet name="header">Nom</f:facet>
+                        <h:outputText style="color: #{o.banni ? '#FF0000' : '#000000'}" value="#{o.nom}"/>
                 </h:column>
                 <h:column>
                     <f:facet name="header">Email</f:facet>
@@ -40,18 +39,17 @@
                     <f:facet name="header"></f:facet>
                     <h:form>
                         <h:commandButton value="Supprimer" action="${utilisateursBean.supprimer(o.id)}" />
-                        <h:commandButton value="Changer le mdp" action="updateMdp" />      
-                        <h:commandButton value="Bannir" action="${utilisateursBean.ban(o.id)}" /> 
-               
-<!-- PLACER UNE CONDITION LORSQUE "o.banni" = true POUR FAIRE APPARAITRE LE BOUTON -->        
-                        <h:commandButton value="Debannir" action="${utilisateursBean.unban(o.id)}" />    
-       
+                        <h:commandButton disabled="#{o.banni ? 'true' : 'false'}" value="Mdp Auto" action="${utilisateursBean.update(o.id)}" />      
+                        <h:commandButton disabled="#{o.banni ? 'true' : 'false'}" value="Bannir" action="${utilisateursBean.ban(o.id)}" /> 
+                        <h:commandButton disabled="#{o.banni ? 'false' : 'true'}" value="Debannir" action="${utilisateursBean.unban(o.id)}" />
                     </h:form>
-                </h:column>
-              
-        </h:dataTable>
+                </h:column>              
+        </h:dataTable>   
         <h:form>
             <h:commandButton value="Nouvel utilisateur" action="ajout" />
+        </h:form>
+        <h:form>
+            <h:commandButton value="Trier" action="${utilisateursBean.supprimer(o.id)}" />
         </h:form>
     </h:body>
 </html>

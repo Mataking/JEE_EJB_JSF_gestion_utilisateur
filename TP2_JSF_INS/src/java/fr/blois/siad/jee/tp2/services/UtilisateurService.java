@@ -13,7 +13,7 @@ public interface UtilisateurService {
 
     public void supprimer(Integer id);
     
-    public void update(Integer id, String mdp);
+    public void update(Integer id);
     
     public void ban(Integer id);
     

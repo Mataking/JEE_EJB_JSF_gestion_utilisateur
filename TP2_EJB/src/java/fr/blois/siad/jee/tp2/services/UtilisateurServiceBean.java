@@ -9,6 +9,8 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import fr.blois.siad.jee.tp2.dto.*;
 import fr.blois.siad.jee.tp2.entities.UtilisateurEntity;
+import java.util.Random;
+import java.util.UUID;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -69,10 +71,10 @@ public class UtilisateurServiceBean implements UtilisateurService {
     }
     
     @Override
-    public void update(Integer id, String mdp){
+    public void update(Integer id){
         try{
             UtilisateurEntity entity = em.find(UtilisateurEntity.class, id);
-            entity.setMotDePasse(mdp);
+            entity.setMotDePasse(UUID.randomUUID().toString());
             em.merge(entity);
         }
         catch(NoResultException nre){}
