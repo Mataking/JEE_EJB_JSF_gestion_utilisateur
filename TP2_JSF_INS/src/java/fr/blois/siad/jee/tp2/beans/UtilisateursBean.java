@@ -90,7 +90,13 @@ public class UtilisateursBean {
         }
 
         // Cas nominal
-        getService().ajouter(new Utilisateur(null, email, motDePasse, nom, new Date(), false));
+        try{
+            getService().ajouter(new Utilisateur(null, email, motDePasse, nom, new Date(), false));
+        }catch(Exception e){
+            
+            context.addMessage(null, new FacesMessage("Email ou pseudonyme déjà utilisé ! Please change !"));
+            return "ajout";
+        }
         return "index";
     }
     

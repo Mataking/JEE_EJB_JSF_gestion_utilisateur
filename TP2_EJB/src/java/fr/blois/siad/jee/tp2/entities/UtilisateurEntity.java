@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.UniqueConstraint;
 
 @Entity
 public class UtilisateurEntity implements Serializable {
@@ -19,13 +20,13 @@ public class UtilisateurEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     
-    @Column
+    @Column(unique = true)
     private String email;
     
     @Column
     private String motDePasse;
     
-    @Column
+    @Column(unique = true)
     private String nom;
     
     @Column

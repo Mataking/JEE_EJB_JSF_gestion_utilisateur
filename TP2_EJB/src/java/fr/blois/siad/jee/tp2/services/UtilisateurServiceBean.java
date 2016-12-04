@@ -12,6 +12,8 @@ import fr.blois.siad.jee.tp2.entities.UtilisateurEntity;
 import java.util.Random;
 import java.util.UUID;
 import javax.ejb.Stateless;
+import javax.faces.application.NavigationHandler;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
@@ -54,11 +56,10 @@ public class UtilisateurServiceBean implements UtilisateurService {
     }
 
     @Override
-    public void ajouter(Utilisateur u) {
-
-        if (u != null) {
-            em.persist(new UtilisateurEntity(u.getEmail(),   u.getMotDePasse(), u.getNom(), new Date(), u.getBanni()));
-        }
+    public void ajouter(Utilisateur u) {     
+       if ( u != null) {
+        em.persist(new UtilisateurEntity(u.getEmail(), u.getMotDePasse(), u.getNom(), new Date(), u.getBanni()));
+       }
     }
 
     @Override
