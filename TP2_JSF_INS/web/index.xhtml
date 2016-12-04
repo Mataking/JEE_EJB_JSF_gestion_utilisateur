@@ -9,7 +9,7 @@
     <h:body>
         <h1>Liste des utilisateurs</h1>
         <h:dataTable value="#{utilisateursBean.utilisateurs}" var="o" border="0" class="order-table">
-         
+<!-- PLACER UNE CONDITION POUR CHANGER LA COULEUR EN ROUGE "o.banni" = true -->             
                 <h:column>
                     <f:facet name="header">Id</f:facet>
                         #{o.id}
@@ -42,10 +42,10 @@
                         <h:commandButton value="Supprimer" action="${utilisateursBean.supprimer(o.id)}" />
                         <h:commandButton value="Changer le mdp" action="updateMdp" />      
                         <h:commandButton value="Bannir" action="${utilisateursBean.ban(o.id)}" /> 
-
-                        <c:when test="#{o.banni = true}">
-                            <h:commandButton value="Debannir" action="${utilisateursBean.unban(o.id)}" />    
-                        </c:when>
+               
+<!-- PLACER UNE CONDITION LORSQUE "o.banni" = true POUR FAIRE APPARAITRE LE BOUTON -->        
+                        <h:commandButton value="Debannir" action="${utilisateursBean.unban(o.id)}" />    
+       
                     </h:form>
                 </h:column>
               
