@@ -53,6 +53,7 @@ public class UtilisateurServiceBean implements UtilisateurService {
 
     @Override
     public void ajouter(Utilisateur u) {
+
         if (u != null) {
             em.persist(new UtilisateurEntity(u.getEmail(),   u.getMotDePasse(), u.getNom(), new Date(), u.getBanni()));
         }
