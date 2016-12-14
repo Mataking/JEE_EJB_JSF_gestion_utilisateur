@@ -8,7 +8,7 @@
     </h:head>
     <h:body>
         <h1>Liste des utilisateurs</h1>
-        <h:dataTable value="#{utilisateursBean.utilisateurs}" var="o" border="0" class="order-table">         
+        <h:dataTable value="#{utilisateursBean.display()}" var="o" class="order-table">    
                 <h:column>
                     <f:facet name="header">Id</f:facet>
                         #{o.id}
@@ -49,7 +49,8 @@
             <h:commandButton value="Nouvel utilisateur" action="ajout" />
         </h:form>
         <h:form>
-            <h:commandButton value="Trier" action="${utilisateursBean.supprimer(o.id)}" />
+            <h:commandButton disabled="#{utilisateursBean.trie ? 'true' : 'false'}" value="Trier" action="${utilisateursBean.trieByName()}" />
+            <h:commandButton disabled="#{utilisateursBean.trie ? 'false' : 'true'}" value="Annuler" action="${utilisateursBean.trieBasic()}" />
         </h:form>
     </h:body>
 </html>

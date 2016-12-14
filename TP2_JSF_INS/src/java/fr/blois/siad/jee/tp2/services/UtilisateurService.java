@@ -18,4 +18,6 @@ public interface UtilisateurService {
     public void ban(Integer id);
     
     public void unban(Integer id);
+    
+    public List<Utilisateur> trie();
 }

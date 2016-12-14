@@ -2,6 +2,8 @@ package fr.blois.siad.jee.tp2.beans;
 
 import fr.blois.siad.jee.tp2.dto.Utilisateur;
 import fr.blois.siad.jee.tp2.services.UtilisateurService;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -18,10 +20,15 @@ public class UtilisateursBean {
     private String email;
     private String motDePasse;
     private String nom;
- 
+    
+    private boolean trie = false;
+    
+    List<Utilisateur> uListUsers = new ArrayList<>();
+   
     private static final long serialVersionUID = 1L;
 
-    public UtilisateursBean() {
+    public UtilisateursBean() {  
+        
     }
 
     public List<Utilisateur> getUtilisateurs() {
@@ -61,6 +68,14 @@ public class UtilisateursBean {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    public boolean isTrie() {
+        return trie;
+    }
+
+    public void setTrie(boolean trie) {
+        this.trie = trie;
+    }   
 
     public void setUtilisateurs(List<Utilisateur> utilisateurs) {
 
@@ -118,5 +133,25 @@ public class UtilisateursBean {
     public String unban(Integer id){
        getService().unban(id);
        return "index";
+    }
+    
+    public List<Utilisateur> display(){  
+        if(isTrie())
+            return uListUsers;  
+        else {
+            uListUsers = getService().listerTous();
+            return uListUsers;
+        }        
+    }
+       
+    public String trieByName(){       
+        setTrie(true);        
+        Collections.sort(uListUsers, (a, b) -> a.getNom().compareToIgnoreCase(b.getNom()));   
+        return "index";
+    }
+    
+    public String trieBasic(){       
+        setTrie(false);
+        return "index";
     }
 }
